@@ -1,0 +1,26 @@
+<section data-ng-controller="KomicsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="komic.title"></h1>
+		<h5 data-ng-bind="komic.genres"></h5>
+	</div>
+	<div class="pull-right" data-ng-show="authentication.user._id == komic.user._id">
+		<a class="btn btn-primary" href="/#!/komics/{{komic._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Created on
+			<span data-ng-bind="komic.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="komic.user.displayName"></span><br>
+			<span data-ng-bind="komic.reviews.length"></span>
+			 Review<span ng-if="komic.reviews.length > 1">s</span>
+			 <br>
+		</em>
+	</small>
+	<button class="btn btn-primary" type="button">Add Review</button>
+</section>
