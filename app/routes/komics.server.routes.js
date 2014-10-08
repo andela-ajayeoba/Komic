@@ -15,9 +15,11 @@ module.exports = function(app) {
 		.delete(users.requiresLogin, komics.hasAuthorization, komics.delete);
 
 	app.route('/komics/:komicId/reviews')
+		.get(komics.listReviews)
 		.post(users.requiresLogin, komics.create_rev);
 
 	app.route('/komics/:komicId/reviews/:reviewId')
+		.get(komics.readReview)
 		.put(users.requiresLogin, komics.hasAuthorization_rev, komics.update_rev)
 		.delete(users.requiresLogin, komics.hasAuthorization_rev, komics.delete_rev);
 

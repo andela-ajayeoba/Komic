@@ -7,7 +7,6 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Komic = mongoose.model('Komic'),
 	Review = mongoose.model('Review'),
-	Rating = mongoose.model('Rating'),
 	_ = require('lodash');
 
 /**
@@ -51,25 +50,6 @@ exports.create_rev = function(req, res) {
 	});
 };
 
-/**
- * Update review of Komic
- */
- exports.update_rev = function (req, res) {
- 	var komic = req.komic;
- 	var review = req.review;
- 	review = _.extend(review, req.body);
-
- 	komic.save(function(err) {
- 		if (err) {
- 			return res.send(400, {
- 				message: errorHandler.getErrorMessage(err)
- 			});
- 		} else {
- 			res.jsonp(komic);
- 		}
- 	});
- };
-
 
 /**
  * Delete review of Komic
@@ -99,6 +79,10 @@ exports.read = function(req, res) {
 	res.jsonp(req.komic);
 };
 
+exports.readReview = function(req, res) {
+	res.jsonp(req.review);
+};
+
 /**
  * Update a Komic
  */
@@ -117,6 +101,25 @@ exports.update = function(req, res) {
 		}
 	});
 };
+
+/**
+ * Update review of Komic
+ */
+ exports.update_rev = function (req, res) {
+ 	var komic = req.komic;
+ 	var review = req.review;
+ 	review = _.extend(review, req.body);
+
+ 	komic.save(function(err) {
+ 		if (err) {
+ 			return res.send(400, {
+ 				message: errorHandler.getErrorMessage(err)
+ 			});
+ 		} else {
+ 			res.jsonp(komic);
+ 		}
+ 	});
+ };
 
 /**
  * Delete an Komic
@@ -149,6 +152,10 @@ exports.list = function(req, res) { Komic.find().sort('-created').populate('user
 	});
 };
 
+exports.listReviews = function(req, res) { 
+	res.jsonp(req.komic.reviews);
+};
+
 /**
  * Komic middleware
  */
@@ -174,19 +181,17 @@ exports.hasAuthorization = function(req, res, next) {
 /**
  * Review middleware
  */
-exports.reviewByID = function(req, res, next, id) { komic.review.findById(id).populate('user', 'displayName').exec(function(err, review) {
-		if (err) return next(err);
-		if (! review) return next(new Error('Failed to load Komic ' + id));
-		req.review = review;
+exports.reviewByID = function(req, res, next, id) { 
+		var komic = req.komic;
+		req.review = komic.reviews.id(id);
 		next();
-	});
 };
 
 /**
  * Review authorization middleware
  */
 exports.hasAuthorization_rev = function(req, res, next) {
-	if(req.comment.user.id !== req.user.id) {
+	if(req.review.user.toString() !== req.user.id) {
 		return res.send(403, 'User is not authorized');
 	}
 	next();

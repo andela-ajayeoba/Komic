@@ -22,7 +22,7 @@
 			 <br>
 		</em>
 	</small>
-	<button class="btn btn-primary" type="button" data-ng-show="komic.reviews">View Reviews</button>
+	<button class="btn btn-primary" type="button" data-ng-show="komic.reviews" data-ng-click="ev = $event">View Reviews</button>
 	<button class="btn btn-primary" type="button" data-ng-click="show_review();">Add Review</button><br><br>
 	<div data-ng-show="review_state" class="review_div">
 		<form class="form-horizontal" data-ng-submit="addReview();" novalidate>
@@ -30,11 +30,11 @@
                 <div class="form-group">
                     <label class="control-label" for="Review">Review:</label>
                     <div class="controls">
-						<textarea data-ng-model="review" id="review" class="form-control" cols="10" rows="5" placeholder="Add Review Here" required></textarea>
+						<textarea data-ng-model="review" id="review" class="form-control" cols="10" rows="5" placeholder="Add Review Here" required="required"></textarea>
 					</div><br><br>
 					<label class="control-label" for="Review">Rating:</label>
                     <div class="controls">
-						<select class="form-control" data-ng-model="rating">
+						<select class="form-control" data-ng-model="komic.reviews.rating" required>
                         <option value=''>Rating</option>
                         <option value='1'>1 Star</option>
                         <option value='2'>2 Star</option>
@@ -52,5 +52,8 @@
 				</div>
             </fieldset>
         </form>
+	</div>
+	<div class="list-group">
+		<div data-ng-repeat="review in komics.reviews">{{review}}</div>
 	</div>
 </section>

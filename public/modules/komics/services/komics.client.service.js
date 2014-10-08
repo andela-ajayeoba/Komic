@@ -13,7 +13,7 @@ angular.module('komics').factory('Komics', ['$resource',
 ])
 .factory('Reviews', ['$resource',
 	function($resource) {
-		return $resource('komics/:komicId/reviews/:id', { komicId: '@komicid', reviewId: '@_id'
+		return $resource('komics/:komicId/reviews/:id', { komicId: '@komicId', reviewId: '@_id'
 		}, {
 			update: {
 				method: 'PUT'

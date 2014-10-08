@@ -27,7 +27,7 @@
                         <label class="control-label" for="upload">Upload Images</label>
                         <div class="controls">
                         <button>
-                            <input type="file" required>
+                            <input type="file" ng-file-select="onFileSelect($files)" multiple onclick="this.value=null" accept="image/*" required>
                         </button>
                         </div>
                     </div>

@@ -40,9 +40,11 @@ angular.module('komics').controller('KomicsController', ['$scope', '$stateParams
 				komicId: $scope.komic._id,
 				review: this.review
 			});
+			console.log(review);
 			$scope.komic.reviews.push({review: this.review, user: Authentication.user.displayName, created: Date.now()});
 			review.$save(function(response) {
 				$scope.komic = response;
+				console.log(response);
 			},function(errorResponse) {
 				$scope.error =errorResponse.data.message;
 			});
@@ -109,8 +111,12 @@ angular.module('komics').controller('KomicsController', ['$scope', '$stateParams
 			});
 		};
 
-		$scope.show_review = function(){
+		$scope.show_review = function() {
         	$scope.review_state = $scope.review_state === false ? true: false;
       	};
+
+      	// $scope.show_review_list = function() {
+      	// 	for (var i in $scope.komic.reviews) 
+      	// };
 	}
 ]);

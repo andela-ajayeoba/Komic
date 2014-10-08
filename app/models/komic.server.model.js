@@ -8,28 +8,6 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-/**********************
-
-Rating Schema
-**********************/	
-var RatingSchema = new Schema({
-	rating: {
-		type: String,
-		default: '',
-		required: 'Please select a Rating'
-	},
-	date: {
-		type: Date,
-		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
-});
-
-mongoose.model('Rating', RatingSchema);
-
 
 /**********************
 
@@ -50,7 +28,11 @@ var ReviewSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
-	rating: [RatingSchema]
+	rating: {
+		type: String,
+		default: '',
+		//required: 'Please select a rating'
+	}
 });
 
 mongoose.model('Review', ReviewSchema);
@@ -78,11 +60,10 @@ var KomicSchema = new Schema({
 	},
 	images: {
 		type: Array,
-		default: []
+		default: ''
 		//required: 'Select a file to upload'
 	},
 	reviews: [ReviewSchema],
-	ratings: [RatingSchema],
 	created: {
 		type: Date,
 		default: Date.now
