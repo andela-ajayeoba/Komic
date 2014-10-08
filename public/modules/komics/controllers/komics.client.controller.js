@@ -1,7 +1,7 @@
 'use strict';
 
 // Komics controller
-angular.module('komics').controller('KomicsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Komics',
+angular.module('komics').controller('KomicsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Komics', 'Reviews',
 	function($scope, $stateParams, $location, Authentication, Komics, Reviews ) {
 		$scope.authentication = Authentication;
 		$scope.review_state = false;
@@ -40,13 +40,14 @@ angular.module('komics').controller('KomicsController', ['$scope', '$stateParams
 				komicId: $scope.komic._id,
 				review: this.review
 			});
-
+			$scope.komic.reviews.push({review: this.review, user: Authentication.user.displayName, created: Date.now()});
 			review.$save(function(response) {
 				$scope.komic = response;
-			}, function(errorResponse) {
+			},function(errorResponse) {
 				$scope.error =errorResponse.data.message;
 			});
 			$scope.review_state = false;
+			$scope.review = '';
 		};
 
 
@@ -107,5 +108,9 @@ angular.module('komics').controller('KomicsController', ['$scope', '$stateParams
 				komicId: $stateParams.komicId
 			});
 		};
+
+		$scope.show_review = function(){
+        	$scope.review_state = $scope.review_state === false ? true: false;
+      	};
 	}
 ]);

@@ -14,9 +14,9 @@ Rating Schema
 **********************/	
 var RatingSchema = new Schema({
 	rating: {
-		type: Number,
+		type: String,
 		default: '',
-		required: 'Comment field cannot be blank'
+		required: 'Please select a Rating'
 	},
 	date: {
 		type: Date,
@@ -49,7 +49,8 @@ var ReviewSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+	rating: [RatingSchema]
 });
 
 mongoose.model('Review', ReviewSchema);

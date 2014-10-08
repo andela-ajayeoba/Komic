@@ -22,5 +22,35 @@
 			 <br>
 		</em>
 	</small>
-	<button class="btn btn-primary" type="button">Add Review</button>
+	<button class="btn btn-primary" type="button" data-ng-show="komic.reviews">View Reviews</button>
+	<button class="btn btn-primary" type="button" data-ng-click="show_review();">Add Review</button><br><br>
+	<div data-ng-show="review_state" class="review_div">
+		<form class="form-horizontal" data-ng-submit="addReview();" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="Review">Review:</label>
+                    <div class="controls">
+						<textarea data-ng-model="review" id="review" class="form-control" cols="10" rows="5" placeholder="Add Review Here" required></textarea>
+					</div><br><br>
+					<label class="control-label" for="Review">Rating:</label>
+                    <div class="controls">
+						<select class="form-control" data-ng-model="rating">
+                        <option value=''>Rating</option>
+                        <option value='1'>1 Star</option>
+                        <option value='2'>2 Star</option>
+                        <option value='3'>3 Star</option>
+                        <option value='4'>4 Star</option>
+                        <option value='5'>5 Star</option>
+                       </select>
+					</div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+	</div>
 </section>

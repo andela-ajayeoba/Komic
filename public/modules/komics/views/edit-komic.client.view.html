@@ -16,7 +16,12 @@
                     </div>
                     <label class="control-label" for="genre">Genre</label>
                     <div class="controls">
-                       <select class="form-control" data-ng-model="komic.genres" data-ng-options="genre for genre in genres" required></select>
+                       <select class="form-control" data-ng-model="komic.genres">
+                        <option value=''>Select a value</option>
+                        <option value='Action'>Action</option>
+                        <option value='Drama'>Drama</option>
+                        <option value='Adventure'>Adventure</option>
+                       </select>
                     </div>
                 </div>
                 <div class="form-group">

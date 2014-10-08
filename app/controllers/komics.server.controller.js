@@ -174,13 +174,12 @@ exports.hasAuthorization = function(req, res, next) {
 /**
  * Review middleware
  */
-exports.reviewByID = function(req, res, next, id) {
-	if (req.komic) {
-		req.review = req.komic.reviews.id(id);
+exports.reviewByID = function(req, res, next, id) { komic.review.findById(id).populate('user', 'displayName').exec(function(err, review) {
+		if (err) return next(err);
+		if (! review) return next(new Error('Failed to load Komic ' + id));
+		req.review = review;
 		next();
-	} else {
-		return next(new Error('Failed to load Review' + id));
-	}
+	});
 };
 
 /**
