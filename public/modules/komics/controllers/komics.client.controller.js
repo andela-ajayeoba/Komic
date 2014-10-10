@@ -1,16 +1,35 @@
 'use strict';
 
 // Komics controller
-angular.module('komics').controller('KomicsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Komics', 'Reviews',
+angular.module('komics')
+.controller('KomicsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Komics', 'Reviews',
 	function($scope, $stateParams, $location, Authentication, Komics, Reviews ) {
 		$scope.authentication = Authentication;
 		$scope.review_state = false;
 
-		// $scope.genres = ['Action',
-		// 	'Adventure',
-		// 	'Comedy',
-		// 	'Drama',
-		// 	'Fantasy'];
+		//function to upload comic images
+		$scope.onFileSelect = function($files) {
+			$scope.files = $files;
+			$scope.imageUrl = [];
+			if($scope.files) {
+				for (var i in $scope.files) {
+					console.log($scope.files[i]);
+					if($scope.files[i].type === 'image/jpeg' || $scope.files[i].type === 'image/png' || $scope.files[i].size < 600000) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							$scope.imageUrl.push({path: e.target.result});
+							console.log($scope.imageUrl);
+						};
+						reader.readAsDataURL($scope.files[i]);
+						$scope.correctFormat = true;
+					} else {
+						alert('error');
+						$scope.correctFormat = false;
+					}
+				}
+			}
+		};
+
 
 		// Create new Komic
 		$scope.create = function() {
@@ -18,9 +37,10 @@ angular.module('komics').controller('KomicsController', ['$scope', '$stateParams
 			var komic = new Komics ({
 				title: this.title,
 				description: this.description,
-				genres: this.genres
+				genres: this.genres,
+				
 			});
-
+			komic.images = $scope.imageUrl;
 			// Redirect after save
 			komic.$save(function(response) {
 				$location.path('komics/' + response._id);
@@ -29,6 +49,7 @@ angular.module('komics').controller('KomicsController', ['$scope', '$stateParams
 				$scope.title = '';
 				$scope.description = '';
 				$scope.genre = '';
+				$scope.images = [];
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

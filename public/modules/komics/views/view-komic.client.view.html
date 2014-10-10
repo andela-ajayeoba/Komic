@@ -22,6 +22,9 @@
 			 <br>
 		</em>
 	</small>
+	<div>
+		<img ng-src="{{komic.images[0].path}}">
+	</div>
 	<button class="btn btn-primary" type="button" data-ng-show="komic.reviews" data-ng-click="ev = $event">View Reviews</button>
 	<button class="btn btn-primary" type="button" data-ng-click="show_review();">Add Review</button><br><br>
 	<div data-ng-show="review_state" class="review_div">

@@ -31,7 +31,7 @@ var ReviewSchema = new Schema({
 	rating: {
 		type: String,
 		default: '',
-		//required: 'Please select a rating'
+		required: 'Please select a rating'
 	}
 });
 
@@ -58,11 +58,14 @@ var KomicSchema = new Schema({
 		trim: true,
 		required: 'Please fill Komic title'
 	},
-	images: {
-		type: Array,
-		default: ''
-		//required: 'Select a file to upload'
-	},
+	images: [{
+		path: {
+			type: String,
+			default: ''
+			//required: 'Select a file to upload'	
+		}
+		
+	}],
 	reviews: [ReviewSchema],
 	created: {
 		type: Date,
