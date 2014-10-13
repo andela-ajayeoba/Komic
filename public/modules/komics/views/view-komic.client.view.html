@@ -25,25 +25,26 @@
 	<div>
 		<img ng-src="{{komic.images[0].path}}">
 	</div>
-	<button class="btn btn-primary" type="button" data-ng-show="komic.reviews" data-ng-click="ev = $event">View Reviews</button>
+	<br><br>
+	<button class="btn btn-primary" type="button" data-ng-show="komic.reviews" data-ng-click="show_review_list();">View Reviews</button>
 	<button class="btn btn-primary" type="button" data-ng-click="show_review();">Add Review</button><br><br>
 	<div data-ng-show="review_state" class="review_div">
-		<form class="form-horizontal" data-ng-submit="addReview();" novalidate>
+		<form class="form-horizontal" data-ng-submit="addReview();">
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="Review">Review:</label>
                     <div class="controls">
-						<textarea data-ng-model="review" id="review" class="form-control" cols="10" rows="5" placeholder="Add Review Here" required="required"></textarea>
+						<textarea data-ng-model="review" id="review" class="form-control" cols="10" rows="5" placeholder="Add Review Here" required></textarea>
 					</div><br><br>
-					<label class="control-label" for="Review">Rating:</label>
+					<label class="control-label" for="Rating">Rating:</label>
                     <div class="controls">
-						<select class="form-control" data-ng-model="komic.reviews.rating" required>
+						<select class="form-control" data-ng-model="rating" required>
                         <option value=''>Rating</option>
-                        <option value='1'>1 Star</option>
-                        <option value='2'>2 Star</option>
-                        <option value='3'>3 Star</option>
-                        <option value='4'>4 Star</option>
-                        <option value='5'>5 Star</option>
+                        <option value='1 Star'>1 Star</option>
+                        <option value='2 Star'>2 Star</option>
+                        <option value='3 Star'>3 Star</option>
+                        <option value='4 Star'>4 Star</option>
+                        <option value='5 Star'>5 Star</option>
                        </select>
 					</div>
                 </div>
@@ -56,7 +57,17 @@
             </fieldset>
         </form>
 	</div>
-	<div class="list-group">
-		<div data-ng-repeat="review in komics.reviews">{{review}}</div>
+	<div class="list-group" data-ng-show="review_list_state">
+		<h2>Reviews</h2>
+		<hr>
+		<div data-ng-repeat="review in komic.reviews">
+			<label>REVIEW:</label> <span data-ng-bind="review.review"></span><br>
+			<small>
+				<em class="text-muted">
+					<label>Posted by:</label> <span data-ng-bind="review.Authentication.user.displayName"></span><br>
+					<label>Posted on:</label> <span data-ng-bind="review.date | date:'mediumDate'"></span><br><br>
+				</em>
+			</small>
+		</div>
 	</div>
 </section>

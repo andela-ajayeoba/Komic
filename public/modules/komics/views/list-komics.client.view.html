@@ -12,6 +12,9 @@
 			</small>
 			<h4 class="list-group-item-heading" data-ng-bind="komic.title"></h4>
             <h5 class="list-group-item-heading" data-ng-bind="komic.genres"></h5>
+            <small>
+                <img class="thumbnail" ng-src="{{komic.images[0].path}}">
+            </small>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!komics.$resolved || komics.length">

@@ -14,24 +14,24 @@ var mongoose = require('mongoose'),
 Review Schema
 **********************/	
 var ReviewSchema = new Schema({
+	rating: {
+		type: String,
+		default: ''
+		//required: 'Please select a rating'
+	},
 	review: {
 		type: String,
 		default: '',
 		trim: true,
-		required: 'Review field cannot be blank'
+		//required: 'Review field cannot be blank'
 	},
 	date: {
 		type: Date,
 		default: Date.now
 	},
-	user: {
+	komic_user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	},
-	rating: {
-		type: String,
-		default: '',
-		required: 'Please select a rating'
 	}
 });
 
@@ -44,27 +44,27 @@ var KomicSchema = new Schema({
 	genres:{
 		type: String,
 		default:'',
-		required: 'please fill in the genre'
+		//required: 'please fill in the genre'
 	},
 	description: {
 		type: String,
 		default: '',
 		trim: true,
-		required: 'Description cannot be blank'
+		//required: 'Description cannot be blank'
 	},
 	title: {
 		type: String,
 		default: '',
 		trim: true,
-		required: 'Please fill Komic title'
+		//required: 'Please fill Komic title'
 	},
 	images: [{
 		path: {
 			type: String,
 			default: ''
 			//required: 'Select a file to upload'	
-		}
-		
+		},
+		//required: 'Select a file to upload'
 	}],
 	reviews: [ReviewSchema],
 	created: {

@@ -3,7 +3,7 @@
         <h1>New Komic</h1>
     </div>
     <div class="col-md">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+        <form class="form-horizontal" data-ng-submit="create()">
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="title">Title</label>
@@ -16,7 +16,7 @@
                     </div>
                     <label class="control-label" for="genres">Genre</label>
                     <div class="controls">
-                       <select class="form-control" data-ng-model="genres">
+                       <select class="form-control" data-ng-model="genres" required>
                         <option value=''>Select a value</option>
                         <option value='Action'>Action</option>
                         <option value='Drama'>Drama</option>
@@ -26,7 +26,7 @@
                     <div>
                         <label class="control-label" for="upload">Upload Images</label>
                         <div class="controls">
-                            <input type="file" ng-file-select="onFileSelect($files)" data-ng-model="images" multiple accept="image/*">
+                            <input type="file" ng-file-select="onFileSelect($files)" data-ng-model="images" multiple accept="image/*" required>
                         </div>
                     </div>
                 </div>

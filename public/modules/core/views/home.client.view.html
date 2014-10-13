@@ -28,18 +28,39 @@
 			</div>
 		</div>
 		<br>
-		<div class="col text-center">
-			<p class="lead">
-				You can also create and upload your comics for your friends to read.
-			</p>
-		</div>
-		<div class="col text-center">
-			<p>
-				<a class="btn btn-primary btn-lg" href="#!">Learn more</a>
-			</p>
-		</div>
+		<!-- <div class="col text-center" data-ng-if=>
+			<div>
+				<p class="lead">
+					You can also create and upload your comics for your friends to read.
+				</p>
+			</div>
+			<div class="col text-center">
+				<p>
+					<a class="btn btn-primary btn-lg" href="/#!/signup">Get started</a>
+				</p>
+			</div>
+		</div> -->
 	</div>
-	<!-- <div>
+</section>
+<section data-ng-controller="AuthenticationController" data-ng-show="!authentication.user">
+	<div class="col text-center">
+			<div>
+				<p class="lead">
+					You can also create and upload your comics for your friends to read.
+				</p>
+			</div>
+			<div class="col text-center">
+				<p>
+					<a class="btn btn-primary btn-lg" href="/#!/signup">Get started</a>
+				</p>
+			</div>
+		</div>
+	<br>Enjoy Komic &amp; Don't Forget to tell your friends about us,
+	<br>The Andela Team.
+</section>
+
+
+<!-- <div>
 		<h2>Congrats! You've configured and run the sample application.</h2>
 		<p>MEAN.JS is a web application boilerplate, which means you should start changing everything :-)</p>
 		<p>This sample application tracks users and articles.</p>
@@ -111,6 +132,3 @@
 			</ul>
 		</p>
 	</div> -->
-	<br>Enjoy Komic &amp; Don't Forget to tell your friends about us,
-	<br>The Andela Team.
-</section>
