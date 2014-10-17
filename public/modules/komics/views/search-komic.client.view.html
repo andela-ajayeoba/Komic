@@ -1,0 +1,17 @@
+<section data-ng-controller="KomicsController" data-ng-init="load_komic_by_genre()">
+ <div class="page-header text-center">
+        <h1>Komics</h1>
+    </div>
+    <div class="list-group text-center">
+        <a data-ng-repeat="komic in komic_result" data-ng-href="#!/komics/{{komic._id}}" class="list-group-item" >
+            <small>
+                <img class="img-thumbnail center" ng-src="{{komic.images[0]}}" style='max-height: 50%; min-width: 70%' data-ng-href="#!/komics/{{komic._id}}">
+            </small>
+            <h4 class="list-group-item-heading" data-ng-bind="komic.title"></h4>
+            <h5 class="list-group-item-heading" data-ng-bind="komic.genre"></h5>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!komics.$resolved || komics.gelength">
+    	No Komics yet, why don't you <a href="/#!/komics/create">create one</a>?
+    </div>
+</section>

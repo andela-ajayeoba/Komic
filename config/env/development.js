@@ -6,13 +6,13 @@ module.exports = {
 		title: 'Komic - Development Environment'
 	},
 	facebook: {
-		clientID: process.env.FACEBOOK_ID || 'APP_ID',
-		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+		clientID: process.env.FACEBOOK_ID || '757852727642381',
+		clientSecret: process.env.FACEBOOK_SECRET || '716c5e6b7b9e774b869143b23f19d467',
 		callbackURL: 'http://localhost:3000/auth/facebook/callback'
 	},
 	twitter: {
-		clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
-		clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
+		clientID: process.env.TWITTER_KEY || 'bbqnJ5SDYcqSUy6RwztK7IlLX',
+		clientSecret: process.env.TWITTER_SECRET || '1CVlS4lt6hoaE2epizctlAoutisMAGu5FUAWxePqdL77mZTiOn',
 		callbackURL: 'http://localhost:3000/auth/twitter/callback'
 	},
 	google: {

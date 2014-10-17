@@ -16,8 +16,8 @@
                     </div>
                     <label class="control-label" for="genres">Genre</label>
                     <div class="controls">
-                       <select class="form-control" data-ng-model="genres" required>
-                        <option value=''>Select a value</option>
+                       <select class="form-control" data-ng-model="genre" required>
+                        <option value=''>Select a genre</option>
                         <option value='Action'>Action</option>
                         <option value='Drama'>Drama</option>
                         <option value='Adventure'>Adventure</option>
@@ -31,7 +31,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-default">
+                    <input type="submit" class="btn btn-default" data-container:"body">
+                </div>
+                <div >
+                    <img src="modules/core/img/looaders/loader.gif" ng-show="loading">
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>

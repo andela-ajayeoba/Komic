@@ -1,57 +1,67 @@
 <br><br><br><br>
 <section data-ng-controller="HomeController">
-	<div class="row">
-		<div class="container">
-			<div class="well col-md-4">
-				<a href="">
-					<img alt="MEAN.JS" class="img-responsive text-left" src="modules/core/img/brand/1280_annihilation.jpg" />
-					<p class="lead text-center">
-					Adventure
+	<div>
+		<div class="row">
+			<div class="container">
+				<div class="well col-md-4">
+					<a data-ng-href="/#!/search_page/Adventure">
+						<img alt="" class="img-responsive text-left" src="modules/core/img/brand/1280_annihilation.jpg" />
+						<p class="lead text-center">
+						Adventure
+						</p>
+					</a>
+				</div>
+				<div class="well col-md-4">
+					<a data-ng-href="/#!/search_page/Action">
+						<img alt="" class="img-responsive text-left" src="modules/core/img/brand/Annihilation_5_1280.jpg" />
+						<p class="lead text-center">
+					Action
 					</p>
-				</a>
+					</a>
+				</div>
+				<div class="well col-md-4">
+					<a data-ng-href="/#!/search_page/Drama">
+						<img alt="" class="img-responsive text-left" src="modules/core/img/brand/AnnQuasar4_1280.jpg" />
+						<p class="lead text-center">
+						Drama
+						</p>
+					</a>
+				</div>
 			</div>
-			<div class="well col-md-4">
-				<a href="">
-					<img alt="MEAN.JS" class="img-responsive text-left" src="modules/core/img/brand/Annihilation_5_1280.jpg" />
-					<p class="lead text-center">
-				Action
-				</p>
-				</a>
-			</div>
-			<div class="well col-md-4">
-				<a href="">
-					<img alt="MEAN.JS" class="img-responsive text-left" src="modules/core/img/brand/AnnQuasar4_1280.jpg" />
-					<p class="lead text-center">
-					Drama
+			<br>
+		</div>
+</section>
+<section data-ng-controller="KomicsController" data-ng-show="authentication.user" data-ng-init="find()">
+	<div class="jumbotron">
+		<p class="lead text-center info">
+						You might also like:
 					</p>
-				</a>
+		<div class="row">
+				<div class="container col-xs-3 style" data-ng-repeat="komic in komics">
+					<a data-ng-href="#!/komics/{{komic._id}}" class="floater">
+						 <small>
+			                <img class="img-thumbnail" ng-src="{{komic.images[0]}}" style='max-height: 100px; min-width: 100px'>
+			                <p class="lead text-center">
+						{{komic.title}}
+						</p>
+			            </small>
+						
+					</a>
+				</div>
 			</div>
 		</div>
-		<br>
-		<!-- <div class="col text-center" data-ng-if=>
-			<div>
-				<p class="lead">
-					You can also create and upload your comics for your friends to read.
-				</p>
-			</div>
-			<div class="col text-center">
-				<p>
-					<a class="btn btn-primary btn-lg" href="/#!/signup">Get started</a>
-				</p>
-			</div>
-		</div> -->
 	</div>
 </section>
 <section data-ng-controller="AuthenticationController" data-ng-show="!authentication.user">
 	<div class="col text-center">
 			<div>
 				<p class="lead">
-					You can also create and upload your comics for your friends to read.
+					Read comics for free. Better still, create and upload your comics for your friends to read.
 				</p>
 			</div>
 			<div class="col text-center">
 				<p>
-					<a class="btn btn-primary btn-lg" href="/#!/signup">Get started</a>
+					<a class="btn btn-primary btn-lg" href="/#!/signup">Sign Up</a>
 				</p>
 			</div>
 		</div>

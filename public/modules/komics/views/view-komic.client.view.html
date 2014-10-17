@@ -1,15 +1,7 @@
-<section data-ng-controller="KomicsController" data-ng-init="findOne()">
+<section data-ng-controller="KomicsController" data-ng-init="findOne()" class="text-center">
 	<div class="page-header">
-		<h1 data-ng-bind="komic.title"></h1>
-		<h5 data-ng-bind="komic.genres"></h5>
-	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == komic.user._id">
-		<a class="btn btn-primary" href="/#!/komics/{{komic._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
+		<a href="/#!/komics"><h1 data-ng-bind="komic.title"></h1></a>
+		<h5 data-ng-bind="komic.description"></h5>
 	</div>
 	<small>
 		<em class="text-muted">
@@ -22,23 +14,34 @@
 			 <br>
 		</em>
 	</small>
-	<div>
-		<img ng-src="{{komic.images[0].path}}">
+	<div class="left">
+		<a ng-click="prev(imageindex)"><span class="glyphicon glyphicon-chevron-left big"></span></a>
 	</div>
+    <div class="middle">
+    	<img class="img-responsive" ng-src="{{komic.images[imageindex]}}" style="max-width: 100%">
+    </div>
+    <div class="right">
+    	<a ng-click="next(imageindex)"><span class="glyphicon glyphicon-chevron-right big"></span></a>
+    </div>
+
 	<br><br>
 	<button class="btn btn-primary" type="button" data-ng-show="komic.reviews" data-ng-click="show_review_list();">View Reviews</button>
-	<button class="btn btn-primary" type="button" data-ng-click="show_review();">Add Review</button><br><br>
+	<button class="btn btn-primary" type="button" data-ng-show="authentication.user._id !== komic.user._id" data-ng-click="show_review();">Add Review</button><br><br>
 	<div data-ng-show="review_state" class="review_div">
 		<form class="form-horizontal" data-ng-submit="addReview();">
             <fieldset>
                 <div class="form-group">
+                	<label class="control-label" for="Review">Name:</label>
+                    <div class="controls">
+						<input data-ng-model="name" id="review" class="form-control" placeholder="Your name" required>
+					</div><br><br>
                     <label class="control-label" for="Review">Review:</label>
                     <div class="controls">
 						<textarea data-ng-model="review" id="review" class="form-control" cols="10" rows="5" placeholder="Add Review Here" required></textarea>
 					</div><br><br>
 					<label class="control-label" for="Rating">Rating:</label>
                     <div class="controls">
-						<select class="form-control" data-ng-model="rating" required>
+						<select class="form-control" data-ng-model="rating">
                         <option value=''>Rating</option>
                         <option value='1 Star'>1 Star</option>
                         <option value='2 Star'>2 Star</option>
@@ -64,7 +67,7 @@
 			<label>REVIEW:</label> <span data-ng-bind="review.review"></span><br>
 			<small>
 				<em class="text-muted">
-					<label>Posted by:</label> <span data-ng-bind="review.Authentication.user.displayName"></span><br>
+					<label>Posted by:</label> <span data-ng-bind="review.name"></span><br>
 					<label>Posted on:</label> <span data-ng-bind="review.date | date:'mediumDate'"></span><br><br>
 				</em>
 			</small>

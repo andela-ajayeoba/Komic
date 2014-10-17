@@ -21,3 +21,4 @@ angular.module('komics').factory('Komics', ['$resource',
 		});
 	}
 ]);
+

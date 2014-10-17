@@ -25,11 +25,15 @@ var ReviewSchema = new Schema({
 		trim: true,
 		//required: 'Review field cannot be blank'
 	},
+	name: {
+		type: String,
+		default: ''
+	},
 	date: {
 		type: Date,
 		default: Date.now
 	},
-	komic_user: {
+	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
 	}
@@ -41,7 +45,7 @@ mongoose.model('Review', ReviewSchema);
  * Komic Schema
  */
 var KomicSchema = new Schema({
-	genres:{
+	genre:{
 		type: String,
 		default:'',
 		//required: 'please fill in the genre'
@@ -58,14 +62,10 @@ var KomicSchema = new Schema({
 		trim: true,
 		//required: 'Please fill Komic title'
 	},
-	images: [{
-		path: {
-			type: String,
-			default: ''
-			//required: 'Select a file to upload'	
-		},
-		//required: 'Select a file to upload'
-	}],
+	images: {
+		type: Array,
+		default: ''
+	},
 	reviews: [ReviewSchema],
 	created: {
 		type: Date,

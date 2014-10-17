@@ -1,20 +1,14 @@
 <section data-ng-controller="KomicsController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Komics</h1>
+    <div class="page-header text-center">
+        <a data-ng-href="#!/"><h1>Komics</h1></a>
     </div>
-    <div class="list-group">
+    <div class="list-group text-center">
         <a data-ng-repeat="komic in komics" data-ng-href="#!/komics/{{komic._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="komic.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="komic.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="komic.title"></h4>
-            <h5 class="list-group-item-heading" data-ng-bind="komic.genres"></h5>
             <small>
-                <img class="thumbnail" ng-src="{{komic.images[0].path}}">
+                <img class="img-thumbnail center" ng-src="{{komic.images[0]}}" style='max-height: 50%; min-width: 70%'>
             </small>
+            <h4 class="list-group-item-heading" data-ng-bind="komic.title"></h4>
+            <h5 class="list-group-item-heading" data-ng-bind="komic.genre"></h5>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!komics.$resolved || komics.length">

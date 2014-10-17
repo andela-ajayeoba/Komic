@@ -20,6 +20,10 @@ angular.module('komics').config(['$stateProvider',
 		state('editKomic', {
 			url: '/komics/:komicId/edit',
 			templateUrl: 'modules/komics/views/edit-komic.client.view.html'
+		}).
+		state('searchKomic', {
+			url: '/search_page/:genre',
+			templateUrl: 'modules/komics/views/search-komic.client.view.html'
 		});
 	}
 ]);
