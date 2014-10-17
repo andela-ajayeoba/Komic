@@ -7,6 +7,7 @@ angular.module('komics')
 		$scope.authentication = Authentication;
 		$scope.review_state = false;
 		$scope.review_list_state = false;
+		$scope.loading = false;
 
 
 		//function to upload comic images
@@ -24,11 +25,13 @@ angular.module('komics')
 					}
 					console.log(i);
 					$scope.start(i);
+
 				}
 			}
 		};
 
 		$scope.start = function(indexOftheFile) {
+			$scope.loading = true;
 			var formData = {
 				key: $scope.files[indexOftheFile].name,
 				AWSAccessKeyID: 'AKIAJQYBMDUWZVLR6ZGA',
@@ -38,7 +41,7 @@ angular.module('komics')
 				filename: $scope.files[indexOftheFile].name,
 				'Content-Type':$scope.files[indexOftheFile].type
 			};
-
+			
 			$scope.imageFiles[indexOftheFile] = $upload.upload({
 				url: 'https://komicbucket.s3-us-west-2.amazonaws.com/',
 				method: 'POST',
@@ -50,9 +53,10 @@ angular.module('komics')
 			});
 			$scope.imageFiles[indexOftheFile].then(function(response) {
 				$timeout(function() {
-					alert('uploaded');
+					$scope.loading = false;
+					//alert('uploaded');
 					var imageUrl = 'https://komicbucket.s3-us-west-2.amazonaws.com/' + $scope.files[indexOftheFile].name;
-					$scope.uploadResult.unshift(imageUrl);
+					$scope.uploadResult.push(imageUrl);
 				});
 			}, function(response) {
 				console.log(response);
@@ -67,6 +71,7 @@ angular.module('komics')
 			$scope.imageFiles[indexOftheFile].xhr(function(xhr) {
 				//alert('xhr');
 			});
+			
 		};
 
 

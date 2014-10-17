@@ -41,20 +41,20 @@ body {
 
 .middle {
 	margin-top: 50px;
-	margin-left: 6%;
-	max-width: 1000px;
+	margin-left: 10%;
+	max-width: 80%;
 	background-color: black
 }
 
 .left {
 	position: fixed;
-	top: 450px;
+	top: 400px;
 	float: left;
 }
 
 .right {
 	position: fixed;
-	top: 450px;
+	top: 400px;
 	right: 115px;
 }
 
@@ -64,4 +64,8 @@ span.big {
 
 a.floater {
 	float: left;
+}
+
+.lead1 {
+	font-size: .6em;
 }
