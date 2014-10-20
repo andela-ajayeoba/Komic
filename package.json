@@ -24,7 +24,7 @@
 		"connect-flash": "~0.1.1",
 		"helmet": "~0.4.0",
 		"consolidate": "~0.10.0",
-		"aws-sdk": "^2.0.19",
+		"aws-sdk": "~2.0.19",
 		"swig": "~1.4.1",
 		"mongoose": "~3.8.8",
 		"passport": "~0.2.0",
