@@ -1,6 +1,8 @@
 <section data-ng-controller="KomicsController" data-ng-init="find()">
     <div class="page-header text-center">
-        <a data-ng-href="#!/"><h1>Komics</h1></a>
+        <a data-ng-href="#!/">
+            <h1>Komikaze</h1>
+        </a>
     </div>
     <div class="list-group text-center">
         <a data-ng-repeat="komic in komics" data-ng-href="#!/komics/{{komic._id}}" class="list-group-item">
@@ -13,5 +15,11 @@
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!komics.$resolved || komics.length">
     	No Komics yet, why don't you <a href="/#!/komics/create">create one</a>?
+    </div>
+</section>
+<section>
+    <div class="col text-center">
+        <br>Enjoy Komikaze &amp; Don't Forget to tell your friends about us,
+        <br>&copy 2014 The Andela Team.
     </div>
 </section>

@@ -60,8 +60,9 @@ angular.module('komics')
 				});
 			}, function(response) {
 				console.log(response);
+				$scope.loading = false;
 				if (response.status > 0) $scope.errorMsg = response.status + ': ' + response.data;
-				//alert('2');
+				alert('Connection Timed out');
 			}, function(evt) {
 				
 			});
@@ -194,11 +195,23 @@ angular.module('komics')
 
 
 		$scope.imageindex = 0;
+
+		// $scope.prevPageDisabled = function() {
+		//     return $scope.imageindex === 0 ? 'disabled' : '';
+		//  };
+
+
+		// $scope.nextPageDisabled = function() {
+		//     return $scope.currentPage === $scope.pageCount() ? 'disabled' : '';
+		// };
+
+
 		$scope.findOne = function(){
 			$http.get('komics/' + $stateParams.komicId).success(function(response){
 				$scope.komic = response;
 			});
 		};
+		
 		$scope.load_komic_by_genre = function() {
 			$http.get($stateParams.genre).success(function(response) {
 				$scope.komic_result = response;

@@ -1,6 +1,16 @@
+<section>
+    <div class="jumbotron" style="background-color: skyblue; opacity: 0.8; overflow: auto; margin-top: 20px">
+        <p>Hello there, i see you wanna create your own komic...Good! Good!! So here's the deal:</p>
+        <p>Your komics are store directly to amazon's cloud storage server (S3), which ensures that our server isn't loaded with your junks...(just kidding).</p>
+        <p>I'm the GOD here...so i alone can delete or update any Komics, so think again...Are you sure you still wanna create komics? :p</p>
+        <p>This is version 0.0.1...so you might notice a couple of glitches, well, it's Nad's fault...i'm relatively new to MEAN STACK...So forward your complaints to him - Nad.</p>
+        <p>Please note that your image files are uploaded directly to amazon after selecting them. So wait a moment before clicking the "Create" button.</p>
+        <p>Thank y'all for being a part of this!</p>
+    </div>
+</section>
 <section data-ng-controller="KomicsController">
     <div class="page-header">
-        <h1>New Komic</h1>
+        <h1>Create Komikaze</h1>
     </div>
     <div class="col-md">
         <form class="form-horizontal" data-ng-submit="create()">
@@ -31,15 +41,22 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-default" data-container:"body">
+                    <input type="submit" value="Create" class="btn btn-primary" data-container:"body">
                 </div>
-                <div >
-                    <img src="modules/core/img/loaders/loader.gif" ng-show="loading">
+                <div ng-show="loading">
+                    <img src="modules/core/img/loaders/ball.gif">
+                    <p>Uploading...</p>
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
             </fieldset>
         </form>
+    </div>
+</section>
+<section>
+    <div class="col text-center">
+        <br>Enjoy Komikaze &amp; Don't Forget to tell your friends about us,
+        <br>&copy 2014 The Andela Team.
     </div>
 </section>

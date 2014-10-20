@@ -15,9 +15,10 @@
 		</em>
 	</small>
 	<div class="left">
-		<a ng-click="prev(imageindex)"><span class="glyphicon glyphicon-chevron-left big"></span></a>
+		<a ng-click="prev(imageindex)" ng-disable="true"><span class="glyphicon glyphicon-chevron-left big"></span></a>
 	</div>
     <div class="middle">
+    	<!-- <img src="modules/core/img/loaders/ball.gif"> -->
     	<img class="img-responsive" ng-src="{{komic.images[imageindex]}}" style="max-width: 100%">
     </div>
     <div class="right">
@@ -27,17 +28,18 @@
 	<br><br>
 	<button class="btn btn-primary" type="button" data-ng-show="komic.reviews" data-ng-click="show_review_list();">View Reviews</button>
 	<button class="btn btn-primary" type="button" data-ng-show="authentication.user._id !== komic.user._id" data-ng-click="show_review();">Add Review</button><br><br>
+	<a href="#!/signin"><em ng-hide="authentication.user"><span>Sign in to add a review.</span></em></a>
 	<div data-ng-show="review_state" class="review_div" style="max-width: 60%; margin: 50px auto">
 		<form class="form-horizontal" data-ng-submit="addReview();">
             <fieldset>
                 <div class="form-group">
                 	<label class="control-label" for="Review">Name:</label>
                     <div class="controls">
-						<input data-ng-model="name" id="review" class="form-control" placeholder="Your name" required>
+						<input data-ng-model="name" id="review" class="form-control" placeholder="It could be an anonymous name :)" required>
 					</div><br><br>
                     <label class="control-label" for="Review">Review:</label>
                     <div class="controls">
-						<textarea data-ng-model="review" id="review" class="form-control" cols="10" rows="5" placeholder="Add Review Here" required></textarea>
+						<textarea data-ng-model="review" id="review" class="form-control" cols="10" rows="5" placeholder="Ok...go ahead and add your BS reviews here :p " required></textarea>
 					</div><br><br>
 					<label class="control-label" for="Rating">Rating:</label>
                     <div class="controls">
@@ -72,5 +74,11 @@
 				</em>
 			</small>
 		</div>
+	</div>
+</section>
+<section>
+	<div class="col text-center">
+		<br>Enjoy Komikaze &amp; Don't Forget to tell your friends about us,
+		<br>&copy 2014 The Andela Team.
 	</div>
 </section>
