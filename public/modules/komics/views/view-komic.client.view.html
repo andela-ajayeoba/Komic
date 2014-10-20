@@ -27,7 +27,7 @@
 
 	<br><br>
 	<button class="btn btn-primary" type="button" data-ng-show="komic.reviews" data-ng-click="show_review_list();">View Reviews</button>
-	<button class="btn btn-primary" type="button" data-ng-show="authentication.user._id !== komic.user._id" data-ng-click="show_review();">Add Review</button><br><br>
+	<button class="btn btn-primary" type="button" data-ng-show="authentication.user || authentication.user._id !== komic.user._id" data-ng-click="show_review();">Add Review</button><br><br>
 	<a href="#!/signin"><em ng-hide="authentication.user"><span>Sign in to add a review.</span></em></a>
 	<div data-ng-show="review_state" class="review_div" style="max-width: 60%; margin: 50px auto">
 		<form class="form-horizontal" data-ng-submit="addReview();">

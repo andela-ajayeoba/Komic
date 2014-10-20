@@ -291,9 +291,9 @@ angular.module('komics').controller('KomicsController', [
             $scope.correctFormat = true;
           } else {
             alert('error');
+            alert('Wrong file format...');
             $scope.correctFormat = false;
           }
-          console.log(i);
           $scope.start(i);
         }
       }
