@@ -46,28 +46,38 @@ body {
 	padding: 20px 40px;
 
 }
+nav.collapse.navbar-collapse {
+	display: block;
+}
 .navbar {
 	border-bottom: 2px solid #6E6E6E;
 /*	z-index: 40;
 	background: inherit;
 	position: fixed;	*/
 }
-.navbar-inverse {
+/*.navbar-inverse {
 	background: linear-gradient(to top, rgba(255, 255, 255, .6),  rgba(255, 255, 255, .6)), url(../img/brand/AnnCon_1280.jpg) no-repeat fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	-ms-background-size: cover;
 	background-size: cover;
+}*/
+.navbar-inverse {
+	background:  -webkit-linear-gradient(bottom, rgba(192, 192, 192, 0.9), rgba(192, 192, 192, 0.9)), url(/modules/core/img/brand/AnnCon_1280.jpg) no-repeat fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
 }
 .jumbotron {
-	background-color: lightblue;
-	background-color: rgba(160, 230, 250, .7);
+	background:  -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+	color: white;
+
 }
 
 .list-group {
 	max-width: 50%; 
 	margin: 50px auto;
+	overflow: auto;
 }
 
 .middle {
@@ -97,10 +107,22 @@ span.big {
 
 a.floater {
 	float: left;
+} 
+/*.img-responsive {
+	margin: auto;
+	width: 75%;
+	height: 600px;
+}*/
+.nav{
+	margin-top: -30px;
 }
 
+
 .well {
+	/*width: 40%;*/
 	z-index: 5;
+	/*margin-left: 200px;*/
+	/*margin: auto;*/
 }
 .overlay {
 	color: #fff;
@@ -130,15 +152,64 @@ a.floater {
     display:block;
 }
 
-footer {
+/*footer {
 	clear: both;
 	font-size: 0.75em;
 	background: #6C77FF;
-/*	border-top: 3px solid green;
-	position: relative;*/
+	border-top: 3px solid green;
+	position: relative;
 	text-align: center;
 	padding-top: 5px;
 	color: #ccc;
 	margin-top: 20px;
 	margin-bottom: 0px;
+}*/
+footer {
+	clear: both;
+	font-size: 14px;
+	background-image:  -webkit-linear-gradient(bottom, rgba(192, 192, 192, 0.5), rgba(192, 192, 192, 0.5));
+	background-image:  -moz-linear-gradient(bottom, rgba(192, 192, 192, 0.5), rgba(192, 192, 192, 0.5));
+	background-image:  -ms-linear-gradient(bottom, rgba(192, 192, 192, 0.5), rgba(192, 192, 192, 0.5));
+	background-image:  -o-gradient(bottom, rgba(192, 192, 192, 0.5), rgba(192, 192, 192, 0.5));
+/*	border-top: 3px solid green;
+	position: relative;*/
+	text-align: center;
+	padding-top: 5px;
+	color: #6E6E6E;
+	margin-top: 70px;
+	border-top: 1px solid #6E6E6E;
+}
+img {
+	height: 70px;
+	margin-top: -15px;
+	margin-left: 20px;
+
+}
+
+.navbar-collapse {
+	max-height: 40px;
+}
+
+.set {
+	margin-top: 100px
+}
+
+.resize {
+	max-height: 50px;
+	margin-left: 20%;
+	margin-right: 20%;
+
+}
+div.form-inline {
+	margin-right: 20%;
+	margin-left: 20%;
+}
+
+.gridKomic {
+	max-height: 300px; 
+	min-height: 300px; 
+	max-width: 300px; 
+	min-width: 300px; 
+	/*display: inline-block; */
+	margin: 5px 5px;
 }

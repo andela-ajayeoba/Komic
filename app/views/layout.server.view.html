@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>{{title}}</title>
+	<title>Komics</title>
 
 	<!-- General META -->
 	<meta charset="utf-8">
@@ -22,6 +22,7 @@
 	<meta property="og:url" content="{{url}}">
 	<meta property="og:image" content="/img/brand/logo.png">
 	<meta property="og:type" content="website">
+	<meta property="og:title" content="Welcome Facebook Read Eval Log Loop"/>
 
 	<!-- Twitter META -->
 	<meta name="twitter:title" content="{{title}}">
@@ -30,7 +31,7 @@
 	<meta name="twitter:image" content="/img/brand/logo.png">
 
 	<!-- Fav Icon -->
-	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<link href="/modules/core/img/brand/logo11.png" rel="shortcut icon" type="image/x-icon">
 
 	<!--Application CSS Files-->
 	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">
@@ -40,9 +41,22 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Dosis:400,700,800|Libre+Baskerville:400,700,400italic|Pacifico|Dancing+Script:400,700|Playball' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript"></script>
 </head>
 
 <body class="ng-cloak">
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=757852727642381&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
 	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
 	<section class="content">
 		<section class="container">

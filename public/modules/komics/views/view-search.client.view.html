@@ -1,5 +1,5 @@
 <section data-ng-controller="KomicsController">
-    <br><br>
+    <br><br><br><br>
     <div class="searchDiv">
     <form class="signin form-inline" name="searchForm" data-ng-submit="search()">
         <fieldset>
@@ -18,15 +18,15 @@
     <section>
         <div class="page-header" class="container">
             <h1>Search Result</h1>
-            <div class="list-group row" data-ng-show="!nosearchData">
-                <a data-ng-repeat="komic in searchData" data-ng-href="#!/komics/{{komic._id}}" class="proddiv list-group-item col-xs-6 col-sm-4 col-md-3" data-ng="addLike()">
-                    <img ng-src="{{komic.images[0]}}" class="img-thumbnail img-thumbnailsize  img-responsive">
+            <div class="list-group-item" data-ng-show="!nosearchData">
+                <a data-ng-repeat="komic in searchData" data-ng-href="#!/komics/{{komic._id}}">
+                    <img ng-src="{{komic.images[0]}}" class="img-thumbnail center" style="max-height: 50%; min-width: 70%">
                     <br>
                     <small class="list-group-item-text">
                         Posted on
                         <span data-ng-bind="komic.created | date:'medium'"></span>
                         by
-                        <span data-ng-bind="komic.user."></span>
+                        <span data-ng-bind="komic.user.displayName"></span>
                     </small>
                     <h4 class="list-group-item-heading" data-ng-bind="komic.title"></h4>
                     <br>

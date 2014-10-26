@@ -9,6 +9,10 @@ angular.module('komics').config(['$stateProvider',
 			url: '/komics',
 			templateUrl: 'modules/komics/views/list-komics.client.view.html'
 		}).
+		state('myKomic', {
+			url: '/mykomics',
+			templateUrl: 'modules/komics/views/myKomic.client.view.html'
+		}).	
 		state('createKomic', {
 			url: '/komics/create',
 			templateUrl: 'modules/komics/views/create-komic.client.view.html'

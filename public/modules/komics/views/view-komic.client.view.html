@@ -1,17 +1,8 @@
-<section data-ng-controller="KomicsController" data-ng-init="findOne()" class="text-center">
+<section data-ng-controller="KomicsController" data-ng-init="findOne()" class="text-center set">
 	<div class="page-header">
 		<h1 ><a href="/#!/komics"><span data-ng-bind="komic.title"></span></a></h1>
 		<h5 data-ng-bind="komic.description"></h5>
 	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == komic.user._id">
-		<a class="btn btn-primary" href="/#!/komics/{{komic._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-
 	<small>
 		<em class="text-muted">
 			Created on
@@ -23,6 +14,7 @@
 			 <br>
 		</em>
 	</small>
+	<div class="fb-share-button pull-right" data-href="#" data-width="1500px"></div>
 	<div class="left">
 		<a ng-click="prev(imageindex)"><span class="glyphicon glyphicon-chevron-left big"></span></a>
 	</div>
@@ -83,11 +75,5 @@
 				</em>
 			</small>
 		</div>
-	</div>
-</section>
-<section>
-	<div class="col text-center">
-		<br>Enjoy Komikaze &amp; Don't Forget to tell your friends about us,
-		<br>&copy 2014 The Andela Team.
 	</div>
 </section>

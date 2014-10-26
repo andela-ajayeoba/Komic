@@ -59,22 +59,22 @@ exports.create_rev = function(req, res) {
 /**
  * Delete review of Komic
  */
-// exports.delete_rev = function(req, res) {
-// 	var komic = req.komic;
-// 	var review = req.review;
+exports.delete_rev = function(req, res) {
+	var komic = req.komic;
+	var review = req.review;
 
-// 	review.remove();
+	review.remove();
 
-// 	komic.save(function(err) {
-// 		if(err) {
-// 			return res.send(400, {
-// 				message: errorHandler.getErrorMessage(err)
-// 			});
-// 		} else {
-// 			res.jsonp(komic);
-// 		}
-// 	});
-// };
+	komic.save(function(err) {
+		if(err) {
+			return res.send(400, {
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(komic);
+		}
+	});
+};
 
 
 /**
@@ -110,21 +110,21 @@ exports.update = function(req, res) {
 /**
  * Update review of Komic
  */
- // exports.update_rev = function (req, res) {
- // 	var komic = req.komic;
- // 	var review = req.review;
- // 	review = _.extend(review, req.body);
+ exports.update_rev = function (req, res) {
+ 	var komic = req.komic;
+ 	var review = req.review;
+ 	review = _.extend(review, req.body);
 
- // 	komic.save(function(err) {
- // 		if (err) {
- // 			return res.send(400, {
- // 				message: errorHandler.getErrorMessage(err)
- // 			});
- // 		} else {
- // 			res.jsonp(komic);
- // 		}
- // 	});
- // };
+ 	komic.save(function(err) {
+ 		if (err) {
+ 			return res.send(400, {
+ 				message: errorHandler.getErrorMessage(err)
+ 			});
+ 		} else {
+ 			res.jsonp(komic);
+ 		}
+ 	});
+ };
 
 /**
  * Delete an Komic

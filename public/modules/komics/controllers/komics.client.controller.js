@@ -232,11 +232,13 @@ angular.module('komics')
 
 		$scope.show_review = function() {
         	$scope.review_state = !$scope.review_state;
+
       	};
 
       	$scope.show_review_list = function() {
         	$scope.review_list_state = !$scope.review_list_state;
       	};
+      	$scope.searchData = Koms.koms;
       	$scope.search = function() {
             $http.get('/search/?' + $scope.myform + '=' + $scope.userQuery)
                 .success(
@@ -247,6 +249,10 @@ angular.module('komics')
                     		$scope.nosearchData = Koms.noSearchData;
                             $scope.userQuery = '';
                     		$location.path('search');
+                    		// location.assign('#!/search');
+                    		// location.reload();
+
+
                     	}
                     	else{
                     	Koms.noSearchData = false;
@@ -255,12 +261,23 @@ angular.module('komics')
                         $scope.searchData = Koms.koms;
                         $scope.userQuery = '';
                         $location.path('search');
+                        // location.assign('#!/search');
+                        // location.reload();
                     }
                     }).error(function(data) {
                     console.log('there was an error');
                 });
         };
-
+        $scope.checkpath = function(){
+        	// console.log($location);
+        		if ($location.$$absUrl === 'http://localhost:3000/#!/search')
+        		{
+        			return true;
+        		}
+        		else{
+        			return false;
+        		}
+        };
 
       	// $scope.show_review_list = function() {
       	// 	for (var i in $scope.komic.reviews) 

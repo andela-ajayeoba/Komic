@@ -1,4 +1,4 @@
-<section data-ng-controller="KomicsController" data-ng-init="find()">
+<section data-ng-controller="KomicsController" data-ng-init="find()" class="set">
     <div class="page-header text-center">
         <a data-ng-href="#!/">
             <h1>Komikaze</h1>
@@ -15,11 +15,5 @@
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!komics.$resolved || komics.length">
     	No Komics yet, why don't you <a href="/#!/komics/create">create one</a>?
-    </div>
-</section>
-<section>
-    <div class="col text-center">
-        <br>Enjoy Komikaze &amp; Don't Forget to tell your friends about us,
-        <br>&copy 2014 The Andela Team.
     </div>
 </section>

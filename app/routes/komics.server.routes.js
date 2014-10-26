@@ -23,9 +23,9 @@ module.exports = function(app) {
 		.post(users.requiresLogin, komics.create_rev);
 
 	app.route('/komics/:komicId/reviews/:reviewId')
-		.get(komics.readReview);
-		// .put(users.requiresLogin, komics.hasAuthorization_rev, komics.update_rev)
-		// .delete(users.requiresLogin, komics.hasAuthorization_rev, komics.delete_rev);
+		.get(komics.readReview)
+		.put(users.requiresLogin, komics.hasAuthorization_rev, komics.update_rev)
+		.delete(users.requiresLogin, komics.hasAuthorization_rev, komics.delete_rev);
 
 	// Finish by binding the Komic middleware
 	app.param('komicId', komics.komicByID);

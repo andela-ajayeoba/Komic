@@ -237,6 +237,7 @@ angular.module('komics').run([
   function (Menus) {
     // Set top bar menu items
     Menus.addMenuItem('topbar', 'Komics', 'komics', 'dropdown', '/komics(/create)?');
+    Menus.addSubMenuItem('topbar', 'komics', 'My Komics', 'mykomics');
     Menus.addSubMenuItem('topbar', 'komics', 'List Komics', 'komics');
     Menus.addSubMenuItem('topbar', 'komics', 'New Komic', 'komics/create');
   }
@@ -249,6 +250,9 @@ angular.module('komics').config([
     $stateProvider.state('listKomics', {
       url: '/komics',
       templateUrl: 'modules/komics/views/list-komics.client.view.html'
+    }).state('myKomic', {
+      url: '/mykomics',
+      templateUrl: 'modules/komics/views/myKomic.client.view.html'
     }).state('createKomic', {
       url: '/komics/create',
       templateUrl: 'modules/komics/views/create-komic.client.view.html'
@@ -258,6 +262,9 @@ angular.module('komics').config([
     }).state('editKomic', {
       url: '/komics/:komicId/edit',
       templateUrl: 'modules/komics/views/edit-komic.client.view.html'
+    }).state('search', {
+      url: '/search',
+      templateUrl: 'modules/komics/views/view-search.client.view.html'
     }).state('searchKomic', {
       url: '/search_page/:genre',
       templateUrl: 'modules/komics/views/search-komic.client.view.html'
@@ -273,13 +280,16 @@ angular.module('komics').controller('KomicsController', [
   '$timeout',
   '$http',
   'Authentication',
+  'Koms',
   'Komics',
   'Reviews',
-  function ($scope, $stateParams, $location, $upload, $timeout, $http, Authentication, Komics, Reviews) {
+  function ($scope, $stateParams, $location, $upload, $timeout, $http, Authentication, Koms, Komics, Reviews) {
     $scope.authentication = Authentication;
     $scope.review_state = false;
     $scope.review_list_state = false;
     $scope.loading = false;
+    $scope.imageindex = 0;
+    $scope.enablenav = false;
     //function to upload comic images
     $scope.onFileSelect = function ($files) {
       $scope.files = $files;
@@ -316,6 +326,7 @@ angular.module('komics').controller('KomicsController', [
         data: formData,
         file: $scope.files[indexOftheFile]
       });
+      console.log(indexOftheFile);
       $scope.imageFiles[indexOftheFile].then(function (response) {
         $timeout(function () {
           $scope.loading = false;
@@ -415,8 +426,11 @@ angular.module('komics').controller('KomicsController', [
     };
     // Update existing Komic
     $scope.update = function () {
+      console.log('i was called');
       var komic = $scope.komic;
+      console.log(komic);
       komic.$update(function () {
+        console.log('i was called 3');
         $location.path('komics/' + komic._id);
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
@@ -432,18 +446,23 @@ angular.module('komics').controller('KomicsController', [
     // 		komicId: $stateParams.komicId
     // 	});
     // };
-    $scope.next = function (nextvallue) {
-      if (nextvallue < $scope.komic.images.length) {
+    $scope.next = function (nextvalue) {
+      if (nextvalue < $scope.komic.images.length) {
         $scope.imageindex++;
+        $scope.enablenav = true;
+      } else {
+        nextvalue = $scope.komic.images.length;
+        $scope.enablenav = false;
       }
     };
-    $scope.prev = function (nextvallue) {
-      if (nextvallue > 0) {
+    $scope.prev = function (nextvalue) {
+      if (nextvalue > 0) {
         $scope.imageindex--;
+        $scope.enablenav = true;
       } else
         $scope.imageindex = 0;
+      $scope.enablenav = false;
     };
-    $scope.imageindex = 0;
     // $scope.prevPageDisabled = function() {
     //     return $scope.imageindex === 0 ? 'disabled' : '';
     //  };
@@ -467,6 +486,37 @@ angular.module('komics').controller('KomicsController', [
     };
     $scope.show_review_list = function () {
       $scope.review_list_state = !$scope.review_list_state;
+    };
+    $scope.searchData = Koms.koms;
+    $scope.search = function () {
+      $http.get('/search/?' + $scope.myform + '=' + $scope.userQuery).success(function (response) {
+        console.log(response);
+        if (response.length === 0) {
+          Koms.noSearchData = true;
+          $scope.nosearchData = Koms.noSearchData;
+          $scope.userQuery = '';
+          $location.path('search');  // location.assign('#!/search');
+                                     // location.reload();
+        } else {
+          Koms.noSearchData = false;
+          $scope.nosearchData = Koms.noSearchData;
+          Koms.koms = response;
+          $scope.searchData = Koms.koms;
+          $scope.userQuery = '';
+          $location.path('search');  // location.assign('#!/search');
+                                     // location.reload();
+        }
+      }).error(function (data) {
+        console.log('there was an error');
+      });
+    };
+    $scope.checkpath = function () {
+      // console.log($location);
+      if ($location.$$absUrl === 'http://localhost:3000/#!/search') {
+        return true;
+      } else {
+        return false;
+      }
     };  // $scope.show_review_list = function() {
         // 	for (var i in $scope.komic.reviews) 
         // };
@@ -477,18 +527,59 @@ angular.module('komics').controller('KomicsController', [
   $sceProvider.enabled(false);
 });'use strict';
 //Komics service used to communicate Komics REST endpoints
-angular.module('komics').factory('Komics', [
+var app = angular.module('komics');
+app.factory('Komics', [
   '$resource',
   function ($resource) {
     return $resource('komics/:komicId', { komicId: '@_id' }, { update: { method: 'PUT' } });
   }
-]).factory('Reviews', [
+]);
+app.factory('Reviews', [
   '$resource',
   function ($resource) {
     return $resource('komics/:komicId/reviews/:id', {
       komicId: '@komicId',
       reviewId: '@_id'
     }, { update: { method: 'PUT' } });
+  }
+]);
+app.factory('Koms', [
+  '$http',
+  function ($http) {
+    var actions = { koms: [] };
+    actions.noSearchData = false;
+    // actions.like = function(product) {
+    //     return $http.put('/products/' + product._id + '/like')
+    //         .success(function(data) {
+    //             product.likes += 1;
+    //             product.likesView = false;
+    //         });
+    // };
+    // actions.dislike = function(product) {
+    //     return $http.put('/products/' + product._id + '/dislike')
+    //         .success(function(data) {
+    //             product.likes -= 1;
+    //             product.likesView = true;
+    //         });
+    // };
+    // actions.addComment = function(id, comment) {
+    //     return $http.post('/products/' + id + '/comments', comment);
+    // };
+    // actions.likeComment = function(product, comment) {
+    //     return $http.put('/products/' + product._id + '/comments/' + comment._id + '/like')
+    //         .success(function(data) {
+    //             comment.likes += 1;
+    //             comment.likesView = false;
+    //         });
+    // };
+    // actions.dislikeComment = function(product, comment) {
+    //     return $http.put('/products/' + product._id + '/comments/' + comment._id + '/dislike')
+    //         .success(function(data) {
+    //             comment.likes -= 1;
+    //             comment.likesView = true;
+    //         });
+    // };
+    return actions;
   }
 ]);'use strict';
 // Config HTTP Error Handling

@@ -1,0 +1,17 @@
+<section data-ng-controller="KomicsController" data-ng-init="find()" class="set">
+        <div class="page-header text-center">
+            <!-- <a data-ng-href="#!/">
+                <h4>Komikaze</h4>
+            </a> -->
+        </div>
+        <div class="container text-center" data-ng-repeat="komic in komics">
+            <a class="gridKomic" data-ng-href="#!/komics/{{komic._id}}" data-ng-if="authentication.user._Id === komic.user._Id">
+                    <img class="img-thumbnail center" ng-src="{{komic.images[0]}}">
+                <h4 class="list-group-item-heading" data-ng-bind="komic.title"></h4>
+                <h5 class="list-group-item-heading" data-ng-bind="komic.genre"></h5>
+            </a>
+        </div>
+        <div class="alert alert-warning text-center" data-ng-hide="!komics.$resolved || komics.length">
+        	No Komics yet, why don't you <a href="/#!/komics/create">create one</a>?
+        </div>
+</section>
