@@ -1,0 +1,44 @@
+<section data-ng-controller="KomicsController">
+    <br><br>
+    <div class="searchDiv">
+    <form class="signin form-inline" name="searchForm" data-ng-submit="search()">
+        <fieldset>
+            <input type="text" name="queryfield"data-ng-model="userQuery" class="form-control" placeholder="Search here" required/>
+        <select data-ng-model='myform'  class="form-control" required >
+            <option value="genre">By Genre</option>
+            <option value="title">By Title</option>
+            <option value="description">By Description</option>
+        </select>
+            <a href="/search">
+                <input type="submit" value="Search" class="btn" data-ng-disabled="searchForm.queryfield.$invalid">
+            </a>
+        </fieldset>
+    </form>
+</div>
+    <section>
+        <div class="page-header" class="container">
+            <h1>Search Result</h1>
+            <div class="list-group row" data-ng-show="!nosearchData">
+                <a data-ng-repeat="komic in searchData" data-ng-href="#!/komics/{{komic._id}}" class="proddiv list-group-item col-xs-6 col-sm-4 col-md-3" data-ng="addLike()">
+                    <img ng-src="{{komic.images[0]}}" class="img-thumbnail img-thumbnailsize  img-responsive">
+                    <br>
+                    <small class="list-group-item-text">
+                        Posted on
+                        <span data-ng-bind="komic.created | date:'medium'"></span>
+                        by
+                        <span data-ng-bind="komic.user."></span>
+                    </small>
+                    <h4 class="list-group-item-heading" data-ng-bind="komic.title"></h4>
+                    <br>
+                </a>
+            </div>
+            <div class="alert alert-warning text-center" data-ng-hide="!products.$resolved || products.length">
+                No Products yet, why don't you <a href="/#!/products/create">create one</a>?
+            </div>
+            <div class="alert alert-warning text-center" data-ng-show="nosearchData">
+                No Product Found, Please try again with a more descriptive search input
+            </div>
+
+        </div>
+    </section>
+</section>

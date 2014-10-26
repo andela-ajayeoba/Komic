@@ -11,66 +11,6 @@ var mongoose = require('mongoose'),
 	_ = require('lodash');
 
 
-// var uuid = require('node-uuid'),
-// 	multiparty = require('multiparty'),
-// 	async = require('async');
-
-
-// var path = require('path'),
-// 	fs = require('fs');
-
-
-// AWS.config.loadFromPath('./config.json');
-
-// //var komic = new Komic();
-
-// AWS.config.update({region: 'us-west-2'});
-
-// var s3 = new AWS.S3();
-
-
-// var uploadImage = function(req, res, contentType, tmpPath) {
-// 	AWS.config.loadFromPath('./config.json');
-
-// 	AWS.config.update({region: 'us-west-2'});
-
-// 	var s3 = new AWS.S3();
-
-// 	var keyVal = tmpPath.lastIndexOf('\\');
-// 	var tmpKey = tmpPath.substring(keyVal+1);
-
-// 	console.log(tmpKey);
-
-// 	if(contentType !== 'image/png' && contentType !== 'image/jpeg') {
-// 		fs.unlink(tmpPath);
-// 		return res.send(400, {
-// 			message: 'Unsuppoerted file type. Only jpeg or png format allowed'
-// 		});
-// 	}
-
-// 	var s3_params = {
-// 		Bucket: 'komicBucket',
-// 		Key: tmpKey,
-// 		ContentType: contentType,
-// 		ACL: 'public-read'
-// 	};
-
-// 	s3.getSignedUrl('putObject', s3_params, function(err, data) {
-// 		if(err) {
-// 			console.log(err);
-// 		}
-// 		else {
-// 			var return_data = {
-// 				signed_request: data,
-// 				url: 'https://komicBucket.s3.amazonaws.com/' + tmpKey
-// 			};
-// 			res.write(JSON.stringify(return_data));
-// 			res.end();
-// 		}
-// 	});
-// };
-
-
 
 /**
  * Create a Komic
@@ -292,4 +232,54 @@ exports.hasAuthorization_rev = function(req, res, next) {
 		return res.send(403, 'User is not authorized');
 	}
 	next();
+};
+
+exports.search = function(req, res) {
+	console.log('function called 0');
+    var $or = {
+        $or: []
+    };
+    var checkQuery = function() {
+        if (req.query.title && req.query.title.length > 0) {
+            $or.$or.push({
+                title: new RegExp(req.query.title, 'i')
+            });
+        } else if (req.query.genre && req.query.genre.length > 1) {
+            $or.$or.push({
+                genre: new RegExp(req.query.genre, 'i')
+            });
+        } else if (req.query.description && req.query.description.length > 1) {
+            $or.$or.push({
+                description: new RegExp(req.query.description, 'i')
+            });
+        } 
+        console.log('function called 1');
+        // else if (req.query.user.displayName && req.query.user.displayName.length > 1) {
+        //     $or.$or.push({
+        //         user.displayName: new RegExp(req.query.user.displayName, 'i')
+        //     });
+        //  } 
+         // else if (req.query.cost && req.query.cost.length > 1) {
+        //     $or.$or.push({
+        //         cost: new RegExp(req.query.cost, 'i')
+        //     });
+        // } else if (req.query.negotiable && req.query.negotiable.length > 1) {
+        //     $or.$or.push({
+        //         negotiable: new RegExp(req.query.negotiable, 'i')
+        //     });
+        // }
+    };
+    console.log('function called 2');
+    checkQuery();
+    Komic.find($or).exec(function(err, data) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(data);
+            console.log(req.body);
+            console.log(data);
+        }
+    });
 };

@@ -1,9 +1,10 @@
 <section data-ng-controller="KomicsController" data-ng-init="load_komic_by_genre()">
  <div class="page-header text-center">
-        <a href="#!/">
-            <h1>Komikaze</h1>
-            <h3 data-ng-bind="komic.genre"></h3>
-        </a>
+        <h1>
+            <a href="#!/">
+            Komikaze
+            </a>
+        </h1>
     </div>
     <div class="list-group text-center">
         <a data-ng-repeat="komic in komic_result" data-ng-href="#!/komics/{{komic._id}}" class="list-group-item" >

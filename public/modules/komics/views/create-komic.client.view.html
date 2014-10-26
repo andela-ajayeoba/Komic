@@ -40,12 +40,12 @@
                         </div>
                     </div>
                 </div>
+                <div ng-show="loading">
+                    <img src="/modules/core/img/loaders/bar.gif">
+                    <p>Uploading...</p>
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" data-container:"body">
-                </div>
-                <div ng-show="loading">
-                    <img src="/modules/core/img/loaders/ball.gif">
-                    <p>Uploading...</p>
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>

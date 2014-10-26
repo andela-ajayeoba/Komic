@@ -2,12 +2,15 @@
 
 // Komics controller
 angular.module('komics')
-.controller('KomicsController', ['$scope', '$stateParams', '$location', '$upload', '$timeout', '$http', 'Authentication', 'Komics', 'Reviews',
-	function($scope, $stateParams, $location, $upload, $timeout, $http, Authentication, Komics, Reviews ) {
+.controller('KomicsController', ['$scope', '$stateParams', '$location', '$upload', '$timeout', '$http', 'Authentication', 'Koms', 'Komics', 'Reviews',
+	function($scope, $stateParams, $location, $upload, $timeout, $http, Authentication, Koms, Komics, Reviews ) {
 		$scope.authentication = Authentication;
 		$scope.review_state = false;
 		$scope.review_list_state = false;
 		$scope.loading = false;
+
+		$scope.imageindex = 0;
+		$scope.enablenav = false;
 
 
 		//function to upload comic images
@@ -51,6 +54,7 @@ angular.module('komics')
 				data: formData,
 				file: $scope.files[indexOftheFile]
 			});
+			console.log(indexOftheFile);
 			$scope.imageFiles[indexOftheFile].then(function(response) {
 				$timeout(function() {
 					$scope.loading = false;
@@ -158,9 +162,11 @@ angular.module('komics')
 
 		// Update existing Komic
 		$scope.update = function() {
+			console.log('i was called');
 			var komic = $scope.komic ;
-
+			console.log(komic);
 			komic.$update(function() {
+				console.log('i was called 3');
 				$location.path('komics/' + komic._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -178,23 +184,27 @@ angular.module('komics')
 		// 		komicId: $stateParams.komicId
 		// 	});
 		// };
-		$scope.next = function(nextvallue){
-			if(nextvallue < $scope.komic.images.length){
+		$scope.next = function(nextvalue){
+			if(nextvalue < $scope.komic.images.length){
 				$scope.imageindex++;
+				$scope.enablenav = true;
+			}
+			else {
+				nextvalue = $scope.komic.images.length;
+				$scope.enablenav = false;
 			}
 		};
 
-		$scope.prev = function(nextvallue){
-			if(nextvallue > 0){
+		$scope.prev = function(nextvalue){
+			if(nextvalue > 0){
 			$scope.imageindex--;
+			$scope.enablenav = true;
 			}
 			else
 				$scope.imageindex = 0;
+				$scope.enablenav = false;
 		};
 
-
-
-		$scope.imageindex = 0;
 
 		// $scope.prevPageDisabled = function() {
 		//     return $scope.imageindex === 0 ? 'disabled' : '';
@@ -227,6 +237,29 @@ angular.module('komics')
       	$scope.show_review_list = function() {
         	$scope.review_list_state = !$scope.review_list_state;
       	};
+      	$scope.search = function() {
+            $http.get('/search/?' + $scope.myform + '=' + $scope.userQuery)
+                .success(
+                    function(response) {
+                    	console.log(response);
+                    	if (response.length === 0){
+                    		Koms.noSearchData = true;
+                    		$scope.nosearchData = Koms.noSearchData;
+                            $scope.userQuery = '';
+                    		$location.path('search');
+                    	}
+                    	else{
+                    	Koms.noSearchData = false;
+                    	$scope.nosearchData = Koms.noSearchData;
+                        Koms.koms = response;
+                        $scope.searchData = Koms.koms;
+                        $scope.userQuery = '';
+                        $location.path('search');
+                    }
+                    }).error(function(data) {
+                    console.log('there was an error');
+                });
+        };
 
 
       	// $scope.show_review_list = function() {

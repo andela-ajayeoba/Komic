@@ -6,25 +6,37 @@
 				<div class="well col-md-4">
 					<a data-ng-href="/#!/search_page/Adventure">
 						<img alt="" class="img-responsive text-left" src="modules/core/img/brand/1280_annihilation.jpg" />
-						<p class="lead text-center">
+						<div class="overlay">
+							<p> 
+								<p class="lead text-center glow">
 						Adventure
 						</p>
+							</p>
+						</div>
 					</a>
 				</div>
 				<div class="well col-md-4">
 					<a data-ng-href="/#!/search_page/Drama">
 						<img alt="" class="img-responsive text-left" src="modules/core/img/brand/AnnQuasar4_1280.jpg" />
-						<p class="lead text-center">
+						
+						<div class="overlay">
+							<p> 
+								<p class="lead text-center glow">
 						Drama
 						</p>
+							</p>
+						</div>
 					</a>
 				</div>
 				<div class="well col-md-4">
 					<a data-ng-href="/#!/search_page/Action">
 						<img alt="" class="img-responsive text-left" src="modules/core/img/brand/Annihilation_5_1280.jpg" />
-						<p class="lead text-center">
+					
+					<div class="overlay">
+							<p class="lead text-center glow">
 					Action
 					</p>
+					</div>
 					</a>
 				</div>
 			</div>
@@ -37,7 +49,7 @@
 						You might also like:
 					</p>
 		<div class="row">
-				<div class="container col-xs-3 style" data-ng-repeat="komic in komics">
+				<div class="container col-xs-3 style" data-ng-repeat="komic in komics|limitTo:4">
 					<a data-ng-href="#!/komics/{{komic._id}}" class="floater">
 						 <small>
 			                <img class="img-thumbnail" ng-src="{{komic.images[0]}}" style='max-height: 100px; min-width: 100px'>
@@ -66,9 +78,10 @@
 		</div>
 	</div>
 </section>
-<section>
+<!-- <section>
 	<div class="col text-center">
 		<br>Enjoy Komikaze &amp; Don't Forget to tell your friends about us,
 		<br>&copy 2014 The Andela Team.
 	</div>
 </section>
+ -->

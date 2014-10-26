@@ -5,6 +5,7 @@ module.exports = function(app) {
 	var komics = require('../../app/controllers/komics');
 
 	// Komics Routes
+	app.route('/search').get(komics.search);
 	app.route('/komics')
 		.get(komics.list)
 		.post(users.requiresLogin, komics.create);
